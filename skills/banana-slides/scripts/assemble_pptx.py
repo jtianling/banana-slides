@@ -1,6 +1,7 @@
 import argparse
 import io
 import json
+import math
 import sys
 import warnings
 from dataclasses import dataclass
@@ -34,11 +35,23 @@ class SlideImage:
     height: int
 
 
-def load_manifest(path: Path) -> dict:
+def reject_nonfinite(value):
+    raise ValueError(f"Non-finite JSON number is not allowed: {value}")
+
+
+def parse_finite_number(value):
+    number = float(value)
+    if not math.isfinite(number):
+        return reject_nonfinite(value)
+    return number
+
+
+def load_manifest(path: Path, schema_path: Path = SCHEMA_PATH) -> dict:
     if path.stat().st_size > MAX_MANIFEST_BYTES:
         raise ValueError("Manifest exceeds 4 MiB.")
-    data = json.loads(path.read_text(encoding="utf-8"))
-    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8"),
+                      parse_constant=reject_nonfinite, parse_float=parse_finite_number)
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
     errors = tuple(Draft202012Validator(schema).iter_errors(data))
     if errors:
         details = "; ".join(
