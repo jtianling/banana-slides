@@ -7,7 +7,7 @@ description: 使用宿主图片工具和本地分层组装生成可编辑 PPTX. 
 
 根据用户资料组织内容, 用图片工具生成无字背景或插画, 再将独立文字与其他元素组装成可编辑 PPTX. 默认交付可编辑版本, 不把完整页面截图当作成品. 不启动原项目后端, 不运行 banana-cli, 不自行调用模型 API.  
 
-这是 2026-10-13 更新的独立工具流适配. 源项目为 [Anionex/banana-slides](https://github.com/Anionex/banana-slides), 修改版源码在 [jtianling/banana-slides](https://github.com/jtianling/banana-slides/tree/main/skills/banana-slides). 本目录按随附的 [AGPL-3.0](LICENSE) 提供. 交付时提供此源码入口.  
+这是 2026-10-13 更新的独立工具流适配. 源项目为 [Anionex/banana-slides](https://github.com/Anionex/banana-slides), 修改版源码在 [jtianling/banana-slides](https://github.com/jtianling/banana-slides/tree/main/skills/banana-slides). 本目录按随附的 [AGPL-3.0](LICENSE) 提供.  
 
 ---
 
@@ -41,4 +41,4 @@ python3 <skill-dir>/scripts/assemble_editable_pptx.py deck/deck.json --output ou
 
 能渲染时渲染后检查遮挡, 文字溢出, 图片夹带文字, 对比度和字体替换. 没有渲染器时说明只完成结构检查, 不声称在 PowerPoint 中验证过. 不通过缩到看不清的字号来掩盖溢出.  
 
-交付最终 PPTX, 不把内部清单或临时副本作为成品. 有 `deliver_file` 时按实际 schema 使用工作区内的真实相对路径; 优先使用工具返回的 deliveryPath, 不虚构链接. 最终回复包含成品, 简短说明文字与数据对象可编辑而照片和插画仍是图片, 并提供修改版源码入口.  
+交付最终 PPTX, 不把内部清单或临时副本作为成品. 有 `deliver_file` 时按实际 schema 使用工作区内的真实相对路径; 优先使用工具返回的 deliveryPath, 不虚构链接. 最终回复包含成品, 简短说明文字与数据对象可编辑而照片和插画仍是图片.  
